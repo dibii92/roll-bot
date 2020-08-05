@@ -34,6 +34,9 @@ const sort_g = (group) => {
 };
 
 client.on("message", (message) => {
+  const msg = message.content;
+  const username = message.author.username;
+
   if (
     group.map((el) => el.name).includes(username) &&
     msg.split(/(\s+)/).length > 1
@@ -48,8 +51,6 @@ client.on("message", (message) => {
   }
 
   if (message.content.includes("!roll") || message.content.includes("!r")) {
-    const msg = message.content;
-    const username = message.author.username;
     if (!group.map((el) => el.name).includes(username)) {
       group.push({
         name: message.author.username,
@@ -62,7 +63,7 @@ client.on("message", (message) => {
   }
   if (message.content.includes("!end") || message.content.includes("!e")) {
     group = [];
-    message.channel.send("END SESSION");
+    message.channel.send("Group cleared !");
   }
   if (message.content.includes("!p") || message.content.includes("!print")) {
     sort_g(group);
