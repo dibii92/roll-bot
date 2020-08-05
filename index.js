@@ -34,6 +34,19 @@ const sort_g = (group) => {
 };
 
 client.on("message", (message) => {
+  if (
+    group.map((el) => el.name).includes(username) &&
+    msg.split(/(\s+)/).length > 1
+  ) {
+    group.forEach((el) => {
+      if (el.name === username) {
+        el.roll = Math.floor(Math.random() * 100) + 1;
+      }
+    });
+    sort_g(group);
+    print_t(group, message);
+  }
+
   if (message.content.includes("!roll") || message.content.includes("!r")) {
     const msg = message.content;
     const username = message.author.username;
@@ -42,18 +55,6 @@ client.on("message", (message) => {
         name: message.author.username,
         roll: Math.floor(Math.random() * 100) + 1,
         play: 1,
-      });
-      sort_g(group);
-      print_t(group, message);
-    }
-    if (
-      group.map((el) => el.name).includes(username) &&
-      msg.split(/(\s+)/).length > 1
-    ) {
-      group.forEach((el) => {
-        if (el.name === username) {
-          el.roll = Math.floor(Math.random() * 100) + 1;
-        }
       });
       sort_g(group);
       print_t(group, message);
