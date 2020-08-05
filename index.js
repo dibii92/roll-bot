@@ -1,5 +1,6 @@
 const Discord = require("discord.js");
 const client = new Discord.Client();
+require("dotenv").config();
 
 let group = [];
 let group_obj = {};
@@ -27,4 +28,4 @@ client.once("ready", () => {
   console.log("Ready!");
 });
 
-client.login("NzQwNDc4MzQzNjk4MzE3MzYz.XypmMg.olZItgfBeQIjHizZUTXvDjUHDfs");
+client.login(process.env.TOKEN);
